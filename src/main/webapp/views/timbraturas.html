@@ -1,0 +1,99 @@
+<div>
+
+    <h2>Timbraturas</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveTimbraturaModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> Create a new Timbratura
+    </button>
+    <div class="modal fade" id="saveTimbraturaModal" tabindex="-1" role="dialog" aria-labelledby="myTimbraturaLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="form" role="form" novalidate
+                      class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                      ng-submit="create()">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myTimbraturaLabel">Create or edit a Timbratura</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" class="form-control" name="id"
+                                   ng-model="timbratura.id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control"
+                                   ng-model="timbratura.username">
+                        </div>
+                        <div class="form-group">
+                            <label>TimbraturaDate</label>
+                            <input type="datetime-local" class="form-control"
+                                   ng-model="timbratura.timbraturaDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipologia</label>
+                            <input type="text" class="form-control"
+                                   ng-model="timbratura.tipologia">
+                        </div>
+                        <div class="form-group">
+                            <label>Info</label>
+                            <input type="text" class="form-control"
+                                   ng-model="timbratura.info">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                        </button>
+                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span> Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>TimbraturaDate</th>
+                    <th>Tipologia</th>
+                    <th>Info</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="timbratura in timbraturas">
+                    <td>{{timbratura.id}}</td>
+                    <td>{{timbratura.username}}</td>
+                    <td>{{timbratura.timbraturaDate}}</td>
+                    <td>{{timbratura.tipologia}}</td>
+                    <td>{{timbratura.info}}</td>
+                    <td>
+                        <button type="submit"
+                                ng-click="update(timbratura.id)"
+                                class="btn btn-default">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(timbratura.id)"
+                                class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span> Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

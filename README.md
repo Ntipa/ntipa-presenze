@@ -1,4 +1,2 @@
-ntipa-presenze
-==============
-
-ntipa-presenze
+README for ntipapresenze
+==========================
