@@ -4,13 +4,17 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A ModelloTurno.
  */
 @Entity
-@Table(name = "T_MODELLOTURNO")
+@Table(name = "T_MODELTURNO")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class ModelloTurno implements Serializable {
 
@@ -24,6 +28,14 @@ public class ModelloTurno implements Serializable {
     @Column(name = "descrizione")
     private String descrizione;
 
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private Set<ModelloRange> ranges = new HashSet<ModelloRange>();
+    
+//    @OneToMany(cascade=CascadeType.ALL)
+//    private Map<GiornoSettimana,Set<Periodo>> ranges = new HashMap<GiornoSettimana, hashsset<Periodo>>();
+    
+    
     public Long getId() {
         return id;
     }
@@ -48,7 +60,15 @@ public class ModelloTurno implements Serializable {
         this.descrizione = descrizione;
     }
 
-    @Override
+    public Set<ModelloRange> getRanges() {
+		return ranges;
+	}
+
+	public void setRanges(Set<ModelloRange> ranges) {
+		this.ranges = ranges;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
