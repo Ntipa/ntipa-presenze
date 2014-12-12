@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>ntipapresenze</title>
+        <title>Ntipa-presenze</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -19,7 +19,7 @@
         <!--[if lt IE 10]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="development"></div>
+        
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -29,7 +29,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                  <a class="navbar-brand" href="#"><span translate="global.title">ntipapresenze</span></a>
+                  <a class="navbar-brand" href="#"><span translate="global.title">Ntipa-presenze</span></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse" ng-switch="authenticated">
                     <ul class="nav navbar-nav nav-pills navbar-right">
@@ -51,6 +51,8 @@
                             </a>
                             <ul class="dropdown-menu" ng-controller="MenuController">
                                 <li ng-switch-when="true"><a href="#/timbratura"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;timbratura</a></li>
+                                <li ng-switch-when="true"><a href="#/turnazione"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;turnazione</a></li>
+                                <li ng-switch-when="true"><a href="#/modelloTurno"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;modelloTurno</a></li>
                                 <!-- JHipster will add entities to the menu here -->
                             </ul>
                         </li>
@@ -125,7 +127,7 @@
             <div class="well" ng-view=""></div>
 
             <div class="footer">
-                <p translate="footer">This is your footer</p>
+                <p>Questo e' il footer</p>
             </div>
         </div>
 
@@ -176,6 +178,12 @@
         <script src="scripts/timbratura/router_timbratura.js"></script>
         <script src="scripts/timbratura/controller_timbratura.js"></script>
         <script src="scripts/timbratura/service_timbratura.js"></script>
+        <script src="scripts/turnazione/router_turnazione.js"></script>
+        <script src="scripts/turnazione/controller_turnazione.js"></script>
+        <script src="scripts/turnazione/service_turnazione.js"></script>
+        <script src="scripts/modelloTurno/router_modelloTurno.js"></script>
+        <script src="scripts/modelloTurno/controller_modelloTurno.js"></script>
+        <script src="scripts/modelloTurno/service_modelloTurno.js"></script>
         <!-- endbuild -->
 </body>
 </html>
