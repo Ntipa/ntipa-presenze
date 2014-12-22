@@ -1,7 +1,8 @@
 package com.ipublic.ntipa.presenze.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -31,11 +32,29 @@ public class ModelloTurno implements Serializable {
 	@Column(name = "nome")
 	private String nome;
 
+	private Integer day;
+
 	@Column(name = "descrizione")
 	private String descrizione;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private Set<ModelloGiorno> giorni = new HashSet<ModelloGiorno>();
+	private Map<String,ModelloGiorno> ranges = new HashMap<String, ModelloGiorno>();
+
+	public Integer getDay() {
+		return day;
+	}
+
+	public void setDay(Integer day) {
+		this.day = day;
+	}
+
+	public Map<String, ModelloGiorno> getRanges() {
+		return ranges;
+	}
+
+	public void setRanges(Map<String, ModelloGiorno> ranges) {
+		this.ranges = ranges;
+	}
 
 	public Long getId() {
 		return id;
@@ -60,15 +79,7 @@ public class ModelloTurno implements Serializable {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-
-	public Set<ModelloGiorno> getGiorni() {
-		return giorni;
-	}
-
-	public void setGiorni(Set<ModelloGiorno> giorni) {
-		this.giorni = giorni;
-	}
-
+ 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

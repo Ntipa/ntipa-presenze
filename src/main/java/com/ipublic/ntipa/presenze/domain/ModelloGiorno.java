@@ -32,9 +32,7 @@ public class ModelloGiorno implements Serializable {
 	private Long id;
 
 	@Column(name = "nome")
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private GiornoSettimana nome;
+	private Integer day;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Periodo> periodi = new HashSet<Periodo>();
@@ -47,12 +45,12 @@ public class ModelloGiorno implements Serializable {
 		this.id = id;
 	}
 
-	public GiornoSettimana getNome() {
-		return nome;
+	public Integer getDay() {
+		return day;
 	}
 
-	public void setNome(GiornoSettimana nome) {
-		this.nome = nome;
+	public void setDay(Integer day) {
+		this.day = day;
 	}
 
 	public Set<Periodo> getPeriodi() {
@@ -67,7 +65,8 @@ public class ModelloGiorno implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((day == null) ? 0 : day.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -80,9 +79,19 @@ public class ModelloGiorno implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ModelloGiorno other = (ModelloGiorno) obj;
-		if (nome != other.nome)
+		if (day == null) {
+			if (other.day != null)
+				return false;
+		} else if (!day.equals(other.day))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+
+	 
 
 }
