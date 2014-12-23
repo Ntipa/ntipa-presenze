@@ -13,6 +13,7 @@
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/bootstrap.css">
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css"/>
         <!-- endbuild -->
     </head>
     <body ng-app="ntipapresenzeApp" ng-controller="MainController">
@@ -127,7 +128,7 @@
             <div class="well" ng-view=""></div>
 
             <div class="footer">
-                <p>Questo e' il footer</p>
+                <p></p>
             </div>
         </div>
 
@@ -145,7 +146,11 @@
         <!-- build:js scripts/scripts.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+        <script src="bower_components/fullcalendar/fullcalendar.js"></script>
+        <script src="bower_components/fullcalendar/gcal.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -175,6 +180,10 @@
         <script src="bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
         <script src="bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/collapse.js"></script>
         <script src="bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/tab.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
         <script src="scripts/timbratura/router_timbratura.js"></script>
         <script src="scripts/timbratura/controller_timbratura.js"></script>
         <script src="scripts/timbratura/service_timbratura.js"></script>

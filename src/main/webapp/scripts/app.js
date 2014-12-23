@@ -3,7 +3,8 @@
 /* App Module */
 
 var ntipapresenzeApp = angular.module('ntipapresenzeApp', ['http-auth-interceptor', 'tmh.dynamicLocale',
-    'ngResource', 'ngRoute', 'ngCookies', 'ntipapresenzeAppUtils', 'pascalprecht.translate', 'truncate', 'ngCacheBuster']);
+    'ngResource', 'ngRoute', 'ngCookies', 'ntipapresenzeAppUtils', 'pascalprecht.translate', 'truncate', 'ngCacheBuster',
+     'mgcrea.ngStrap','ui.calendar']);
 
 ntipapresenzeApp
     .config(function ($routeProvider, $httpProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider, USER_ROLES) {

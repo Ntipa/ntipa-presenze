@@ -29,17 +29,27 @@ ntipapresenzeApp.controller('TurnazioneController', function ($scope, resolvedTu
             $scope.turnazione = {turnazione: null, id: null};
         };
 
+        $scope.listDay = {};
+        $scope.addDay = function (day) {
+             $scope.listDay.push(day);
+        };
+
         $scope.persone = [
                 {"nome": "Giambanco", "codice": "GMBGPP82R07G273S"},
                 {"nome": "Tornabene", "codice": "TRBTND76T04Y143W"},
-                
                 {"nome": "Testaverde", "codice": "TSVGVN73R08G372A"}
-              ];
+        ];
 
-        /*$scope.myVar = true;
+        
+        /*
+        $scope.myVar = false;
         $scope.toggle = function() {
-          $scope.myVar = !$scope.myVar;
-        };*/
+        $scope.myVar = !$scope.myVar;
+        };
+
+        */
+
+        
     
 
     });

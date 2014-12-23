@@ -1,111 +1,97 @@
 <div class="container">
-    <form class="form-inline" role="form">
-     <legend>Turnazione:</legend>
-     <div>
-         <div class="form-group col-sm-6" >
-             <label class="sr-only" for="modello">Scegli Modello :</label>
-            <div>
-                <select class="form-control">
-                  <option value="mod1">Modello 1</option>
-                  <option value="mod2">Modello 2</option>
-                  <option value="mod3">Modello 3</option>
-                  
-                </select>
-            </div>
+  <form class="form-inline" role="form">
+     <h2>Turnazione:</h2><br>
+     
+     <div class="row">
+       <div class="form-group col-sm-6" >
+         <label for="modello">Scegli Modello :</label>
+         <div>
+           <select class="form-control">
+             <option value="mod1">Modello 1</option>
+             <option value="mod2">Modello 2</option>
+             <option value="mod3">Modello 3</option>
+           </select>
          </div>
-        <div class="form-group col-sm-2">
-           <label class="sr-only" for="persona">Persona :</label>
-           Cerca Persona: <input id="ricerca" ng-model="query">
-              
-        </div>
+       </div>
+        
+       <div class="form-group col-sm-2">
+          <label for="persona">Cerca Persona:</label>
+          <input id="ricerca" ng-model="query">
+       </div>
        
        <div class="form-group col-sm-4" style="color:blue" ng-show="query">
          <ul>
-           <li ng-repeat="x in persone | orderBy:'nome' | filter:query">
+           <li class="btn" type="none" ng-repeat="x in persone | orderBy:'nome' | filter:query" ng-click="toggle()">
                 {{ x.nome + ', cod : ' + x.codice }}
            </li>
          </ul>
        </div>
-
-
      </div>
+     <div ui-calendar ng-model="eventSources"></div> 
+
+  </form>
+</div>
+   <!-- 
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+        
+      </div>  -->
+
 
      
-    </form>
+
+     <!-- <div class="row">
+
+<div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+
+
+<!--
+       <div class="form-group col-sm-6">
+       <br>
+         <p ng-show="myVar">Benvenuto Sg. {{x.nome}}</p>
+       </div>
+       <div class="form-group col-sm-6">
+       </div>
+     </div>
+ -->
+   
    
 
-</div>
 
-<!--
-<script>
-            function PersoneCtrl($scope) {
-              $scope.persone = [
-                {"nome": "Giambanco", "codice": "GMBGPP82rvdscvsd3"},
-                {"nome": "Tornabene", "codice": "TRBTND804557dfnf8"},
-                
-                {"nome": "Testaverde", "codice": "TSVGVNdfjfisdifd"}
-              ];
-            }  
-</script>
--->
-
-<!--
-<div class="container">
-    <form class="form-horizontal" role="form">
-     <legend>Turnazione:</legend>
-     <div class="row">
-      <div class="span4">
-         <div class="form-group">
-             <label for="modello" class="span2">Scegli Modello :</label>
-            <div class="span2">
-                <select class="form-control">
-                  <option>Modello 1</option>
-                  <option>Modello 2</option>
-                  <option>Modello 3</option>
-                  <option>Modello 4</option>
-                  <option>Modello 5</option>
-                </select>
-            </div>
-         </div>
-        </div>
-
-       <div class="span8">
-        <div class="form-group">
-           <label for="persona" class="span2">Persona :</label>
-              <div class="span6">  
-                <select class="form-control">
-                  <option>Persona 1</option>
-                  <option>Persona 2</option>
-                  <option>Persona 3</option>
-                  <option>Persona 4</option>
-                  <option>Persona 5</option>
-                </select>
-               </div> 
-          </div>
-        </div>
-     </div>
-    </form>
-</div>
--->
-
-
-<!--
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    Modello
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Modello turno</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ad personam</a></li>
-    
-  </ul>
-</div>
 
 
 
 
 
+<!--
 
 <div>
    <h2>Turnaziones</h2>
