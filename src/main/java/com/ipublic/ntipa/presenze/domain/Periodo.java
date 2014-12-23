@@ -2,9 +2,15 @@ package com.ipublic.ntipa.presenze.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -14,17 +20,14 @@ import com.ipublic.ntipa.presenze.domain.util.CustomDateTimeDeserializer;
 import com.ipublic.ntipa.presenze.domain.util.CustomLocalDateTimeDeserializer;
 import com.ipublic.ntipa.presenze.domain.util.CustomLocalDateTimeSerializer;
 
-@Embeddable
+@Entity
+@Table(name = "T_PERIODO")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Periodo implements Serializable {
 
-	public Periodo() {
-	}
-
-	public Periodo(LocalDateTime da, LocalDateTime a) {
-		this.da = da;
-		this.a = a;
-
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
 	@NotNull
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
@@ -52,6 +55,14 @@ public class Periodo implements Serializable {
 
 	public void setA(LocalDateTime a) {
 		this.a = a;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
