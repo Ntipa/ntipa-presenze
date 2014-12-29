@@ -34,7 +34,16 @@ ntipapresenzeApp.controller('ModelloTurnoController', function ($log, $scope, re
           for (var i=1 ; i<=num ; i++) {
            $scope.listDay[i]=[];
            };
+
+          for (var j=1 ; j<=num ; j++)
+          $scope.listDay[j].push({ord:j});     
+
+
         };
+
+       // 
+       //$scope.listDay.sort(function(a,b){
+         //   return a.ord < b.ord ? -1:1; });
 
         $scope.addRange = function (day) {
              $scope.listDay[day].push({da:null,a:null}) ;

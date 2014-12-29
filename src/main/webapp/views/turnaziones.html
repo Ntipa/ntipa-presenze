@@ -1,3 +1,153 @@
+<html>
+<head>
+
+  <style>
+
+  #external-events {
+    float: left;
+    width: 150px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+    text-align: left;
+  }
+    
+  #external-events h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+  }
+    
+  #external-events .fc-event {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+    
+  #external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+  }
+    
+  #external-events p input {
+    margin: 0;
+    vertical-align: middle;
+  }
+
+ 
+
+</style>
+<script>
+
+  $(document).ready(function() {
+
+
+    /* initialize the external events
+    -----------------------------------------------------------------*/
+
+    $('#external-events .fc-event').each(function() {
+
+      // store data so the calendar knows to render an event upon drop
+      $(this).data('event', {
+        title: $.trim($(this).text()), // use the element's text as the event title
+        stick: true // maintain when user navigates (see docs on the renderEvent method)
+      });
+
+          //var eventObject l'ho messa io
+       var eventObject = {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                backgroundColor: $(this).css('background-color')
+        };
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject);
+
+      // make the event draggable using jQuery UI
+      $(this).draggable({
+        zIndex: 999,
+        revert: true,      // will cause the event to go back to its
+        revertDuration: 0  //  original position after the drag
+      });
+
+
+    });
+
+
+    /* initialize the calendar
+    -----------------------------------------------------------------*/
+
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      firstDay: 1,
+      allDaySlot : false,
+      lazyFetching: false,
+      monthNames:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
+      monthNamesShort: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
+      dayNames: ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'],
+      dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+      buttonText: {
+                                prev:     '&nbsp;&#9668;&nbsp;',  // left triangle
+                                next:     '&nbsp;&#9658;&nbsp;',  // right triangle
+                                prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
+                                nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
+                                today:    'Oggi',
+                                month:    'Mese',
+                                week:     'Settimana',
+                                day:      'Giorno'
+      },
+      columnFormat: {
+              month: 'ddd',    // Mon
+              week: 'd/M ddd', // Mon 9/7
+              day: 'dddd d/M'  // Monday 9/7
+      },
+      editable: true,
+      droppable: true, // this allows things to be dropped onto the calendar
+      drop: function(date, allDay) {
+          // retrieve the dropped element's stored Event Object
+          var originalEventObject = $(this).data('eventObject');
+
+          // we need to copy it, so that multiple events don't have a reference to the same object
+          var copiedEventObject = $.extend({}, originalEventObject);
+
+          var today = new Date();
+
+          // assign it the date that was reported
+          copiedEventObject.id = today.getTime();
+          copiedEventObject.start = date;
+          copiedEventObject.allDay = allDay;
+          $('#calendar').fullCalendar('renderEvent', copiedEventObject, false);
+          
+            if ($('#drop-remove').is(':checked')) {
+            // if so, remove the element from the "Draggable Events" list
+            $(this).remove();
+            }
+
+          }
+
+
+
+
+
+
+      /*drop: function() {
+        // is the "remove after drop" checkbox checked?
+        if ($('#drop-remove').is(':checked')) {
+          // if so, remove the element from the "Draggable Events" list
+          $(this).remove();
+        }
+      }*/
+    });
+
+
+  });
+
+</script>
+
+</head>
+<body>
 <div class="container">
   <form class="form-inline" role="form">
      <h2>Turnazione:</h2><br>
@@ -27,147 +177,60 @@
          </ul>
        </div>
      </div>
-     <div ui-calendar ng-model="eventSources"></div> 
+     <br> <br>
+     <div class="row">
+       <div class="form-group col-sm-8">
+         <!-- <div>
+         <script>
+           $(document).ready(function() {
 
-  </form>
-</div>
-   <!-- 
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
+                // page is now ready, initialize the calendar...
+
+                $('#calendar').fullCalendar({
+
+                    // put your options and callbacks here
+                })
+
             });
-        </script>
-        
-      </div>  -->
 
+         </script>
+         <div id='calendar'></div>
+         </div> -->
+          
+        <div id="calendar" class="fc fc-ltr fc-unthemed"> </div>  
 
-     
-
-     <!-- <div class="row">
-
-<div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-    </div>
-
-
-<!--
-       <div class="form-group col-sm-6">
-       <br>
-         <p ng-show="myVar">Benvenuto Sg. {{x.nome}}</p>
+ 
        </div>
-       <div class="form-group col-sm-6">
+       <div class="form-group col-sm-4" >
+         
+          <div id="external-events">
+            <h4>Trascina modelli sul calendario</h4>
+                <div class="fc-event ui-draggable ui-draggable-handle">Modello 1</div>
+                <div class="fc-event ui-draggable ui-draggable-handle">Modello 2</div>
+                <div class="fc-event ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">Modello 3</div>
+                <div class="fc-event ui-draggable ui-draggable-handle">Modello 4</div>
+                <div class="fc-event ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">Modello 5</div>
+                <p>
+                  <input type="checkbox" id="drop-remove">
+                  <label for="drop-remove">remove after drop</label>
+                </p>
+         </div>
+
+
+         <!-- <button type="button" class="btn btn-primary"  ng-click="addEvent()">Crea Evento</button>
+          <ul class="unstyled">
+                            <li ng-repeat="e in events">
+                                <div class="alert alert-info">
+                                    <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
+                                    <b> <input ng-model="e.title"></b> 
+                                    {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
+                                </div>
+                            </li>
+                        </ul> -->
+
        </div>
      </div>
- -->
-   
-   
-
-
-
-
-
-
-
-<!--
-
-<div>
-   <h2>Turnaziones</h2>
-
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveTurnazioneModal" ng-click="clear()">
-        <span class="glyphicon glyphicon-flash"></span> Create a new Turnazione
-    </button>
-    <div class="modal fade" id="saveTurnazioneModal" tabindex="-1" role="dialog" aria-labelledby="myTurnazioneLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form name="form" role="form" novalidate
-                      class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
-                      ng-submit="create()">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" id="myTurnazioneLabel">Create or edit a Turnazione</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>ID</label>
-                            <input type="text" class="form-control" name="id"
-                                   ng-model="turnazione.id" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Turnazione</label>
-                            <input type="text" class="form-control"
-                                   ng-model="turnazione.turnazione">
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                        </button>
-                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-save"></span> Save
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Turnazione</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="turnazione in turnaziones">
-                    <td>{{turnazione.id}}</td>
-                    <td>{{turnazione.turnazione}}</td>
-                    <td>
-                        <button type="submit"
-                                ng-click="update(turnazione.id)"
-                                class="btn btn-default">
-                            <span class="glyphicon glyphicon-pencil"></span> Edit
-                        </button>
-                        <button type="submit"
-                                ng-click="delete(turnazione.id)"
-                                class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span> Delete
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
--->
+  </form>
+</div> 
+</body>   
+</html>

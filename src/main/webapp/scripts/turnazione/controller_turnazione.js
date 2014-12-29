@@ -40,30 +40,62 @@ ntipapresenzeApp.controller('TurnazioneController', function ($scope, resolvedTu
                 {"nome": "Testaverde", "codice": "TSVGVN73R08G372A"}
         ];
 
-        
-        /*
-        $scope.myVar = false;
-        $scope.toggle = function() {
-        $scope.myVar = !$scope.myVar;
+       /* $scope.eventSources = {};
+
+        $scope.uiConfig = {
+          calendar:{
+          height: 300,
+          editable: true,
+          droppable: true, // this allows things to be dropped onto the calendar
+              drop: function() {
+                // is the "remove after drop" checkbox checked?
+                if ($('#drop-remove').is(':checked')) {
+                  // if so, remove the element from the "Draggable Events" list
+                  $(this).remove();
+                }
+              }
+
+          
+          header:{
+            left: 'month basicWeek basicDay agendaWeek agendaDay',
+            center: 'title',
+            right: 'today prev,next'
+          },
+
+          dayClick: $scope.alertEventOnClick,
+          eventDrop: $scope.alertOnDrop,
+          eventResize: $scope.alertOnResize
+          }
         };
 
-        */
+        $scope.extraEventSignature = function(event) {
+            $scope.eventSources[1]=[];
+            $scope.eventSources[1].push({
+                events: [
+                    {
+                        title: 'Event1',
+                        start: '2014-12-30'
+                    },
+                    {
+                        title: 'Event2',
+                        start: '2014-12-31'
+                    }
+                    // etc...
+                ],
+                color: 'yellow',   // an option!
+                textColor: 'black' // an option!
+                });
+          
 
+
+        };*/
+
+
+ 
+
+     
         
     
 
     });
 
-
-/*
-
-           function PersoneCtrl($scope) {
-              $scope.persone = [
-                {"nome": "Giambanco", "codice": "GMBGPP82rvdscvsd3"},
-                {"nome": "Tornabene", "codice": "TRBTND804557dfnf8"},
-                
-                {"nome": "Testaverde", "codice": "TSVGVNdfjfisdifd"}
-              ];
-            }  
-
-*/
