@@ -1,42 +1,39 @@
 <html>
-<head>
+  <head>
+    <style>
 
-  <style>
+      #external-events {
+        float: left;
+        width: 150px;
+        padding: 0 10px;
+        border: 1px solid #ccc;
+        background: #eee;
+        text-align: left;
+      }
+        
+      #external-events h4 {
+        font-size: 16px;
+        margin-top: 0;
+        padding-top: 1em;
+      }
+        
+      #external-events .fc-event {
+        margin: 10px 0;
+        cursor: pointer;
+      }
+        
+      #external-events p {
+        margin: 1.5em 0;
+        font-size: 11px;
+        color: #666;
+      }
+        
+      #external-events p input {
+        margin: 0;
+        vertical-align: middle;
+      }
 
-  #external-events {
-    float: left;
-    width: 150px;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    background: #eee;
-    text-align: left;
-  }
-    
-  #external-events h4 {
-    font-size: 16px;
-    margin-top: 0;
-    padding-top: 1em;
-  }
-    
-  #external-events .fc-event {
-    margin: 10px 0;
-    cursor: pointer;
-  }
-    
-  #external-events p {
-    margin: 1.5em 0;
-    font-size: 11px;
-    color: #666;
-  }
-    
-  #external-events p input {
-    margin: 0;
-    vertical-align: middle;
-  }
-
- 
-
-</style>
+    </style>
 <script>
 
   $(document).ready(function() {
@@ -55,8 +52,8 @@
 
           //var eventObject l'ho messa io
        var eventObject = {
-                title: $.trim($(this).text()), // use the element's text as the event title
-                backgroundColor: $(this).css('background-color')
+                title: $.trim($(this).text()) // use the element's text as the event title
+                
         };
         // store the Event Object in the DOM element so we can get to it later
         $(this).data('eventObject', eventObject);
@@ -67,7 +64,7 @@
         revert: true,      // will cause the event to go back to its
         revertDuration: 0  //  original position after the drag
       });
-
+  
 
     });
 
@@ -89,14 +86,14 @@
       dayNames: ['Domenica', 'Luned&igrave;', 'Marted&igrave;', 'Mercoled&igrave;', 'Gioved&igrave;', 'Venerd&igrave;', 'Sabato'],
       dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
       buttonText: {
-                                prev:     '&nbsp;&#9668;&nbsp;',  // left triangle
-                                next:     '&nbsp;&#9658;&nbsp;',  // right triangle
-                                prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
-                                nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
-                                today:    'Oggi',
-                                month:    'Mese',
-                                week:     'Settimana',
-                                day:      'Giorno'
+                    prev:     '&nbsp;&#9668;&nbsp;',  // left triangle
+                    next:     '&nbsp;&#9658;&nbsp;',  // right triangle
+                    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
+                    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
+                    today:    'Oggi',
+                    month:    'Mese',
+                    week:     'Settimana',
+                    day:      'Giorno'
       },
       columnFormat: {
               month: 'ddd',    // Mon
@@ -104,133 +101,123 @@
               day: 'dddd d/M'  // Monday 9/7
       },
       editable: true,
+      events: [
+                {
+                  title  : 'Prova 1',
+                  start  : '2015-01-01',
+                  end : '2015-01-03'
+                },
+                {
+                  title  : 'Prova 2',
+                  start  : '2015-01-03'
+                },
+                {
+                  title  : 'Prova 3',
+                  start  : '2015-01-04'
+                }
+
+              ],
       droppable: true, // this allows things to be dropped onto the calendar
       drop: function(date, allDay) {
-          // retrieve the dropped element's stored Event Object
-          var originalEventObject = $(this).data('eventObject');
+        // retrieve the dropped element's stored Event Object
+        var originalEventObject = $(this).data('eventObject');
 
-          // we need to copy it, so that multiple events don't have a reference to the same object
-          var copiedEventObject = $.extend({}, originalEventObject);
+        // we need to copy it, so that multiple events don't have a reference to the same object
+        var copiedEventObject = $.extend({}, originalEventObject);
 
-          var today = new Date();
+        var today = new Date();
 
-          // assign it the date that was reported
-          copiedEventObject.id = today.getTime();
-          copiedEventObject.start = date;
-          copiedEventObject.allDay = allDay;
-          $('#calendar').fullCalendar('renderEvent', copiedEventObject, false);
+        // assign it the date that was reported
+        copiedEventObject.id = today.getTime();
+        copiedEventObject.start = date;
+        copiedEventObject.allDay = allDay;
+        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+        
           
-            if ($('#drop-remove').is(':checked')) {
-            // if so, remove the element from the "Draggable Events" list
-            $(this).remove();
-            }
-
-          }
-
-
-
-
-
-
-      /*drop: function() {
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
+     },
+      
+      eventClick: function(calEvent) {
+        if(confirm("Elimino dal calendario il modello per il giorno selezionato?")) {
+                $.ajax({
+                  
+                  success: function(msg){
+                        //alert(msg); //debug
+                        $('#calendar').fullCalendar('removeEvents',calEvent.id);     
+                  },
+                  error: function() {
+                        revertFunc();
+                  }
+                });
         }
-      }*/
+      },
+
+      eventMouseover: function(calEvent) {
+                                $(this).find('.fc-event-title').html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'+calEvent.title);
+                        }
+
+
+
     });
-
-
   });
 
 </script>
 
 </head>
-<body>
-<div class="container">
-  <form class="form-inline" role="form">
-     <h2>Turnazione:</h2><br>
-     
-     <div class="row">
-       <div class="form-group col-sm-6" >
-         <label for="modello">Scegli Modello :</label>
-         <div>
-           <select class="form-control">
-             <option value="mod1">Modello 1</option>
-             <option value="mod2">Modello 2</option>
-             <option value="mod3">Modello 3</option>
-           </select>
-         </div>
-       </div>
-        
-       <div class="form-group col-sm-2">
-          <label for="persona">Cerca Persona:</label>
-          <input id="ricerca" ng-model="query">
-       </div>
-       
-       <div class="form-group col-sm-4" style="color:blue" ng-show="query">
-         <ul>
-           <li class="btn" type="none" ng-repeat="x in persone | orderBy:'nome' | filter:query" ng-click="toggle()">
-                {{ x.nome + ', cod : ' + x.codice }}
-           </li>
-         </ul>
-       </div>
-     </div>
-     <br> <br>
-     <div class="row">
-       <div class="form-group col-sm-8">
-         <!-- <div>
-         <script>
-           $(document).ready(function() {
-
-                // page is now ready, initialize the calendar...
-
-                $('#calendar').fullCalendar({
-
-                    // put your options and callbacks here
-                })
-
-            });
-
-         </script>
-         <div id='calendar'></div>
-         </div> -->
-          
-        <div id="calendar" class="fc fc-ltr fc-unthemed"> </div>  
-
- 
-       </div>
-       <div class="form-group col-sm-4" >
+  <body>
+    <div class="container">
+      <form class="form-inline" role="form">
+         <h2>Turnazione:</h2><br>
          
-          <div id="external-events">
-            <h4>Trascina modelli sul calendario</h4>
-                <div class="fc-event ui-draggable ui-draggable-handle">Modello 1</div>
-                <div class="fc-event ui-draggable ui-draggable-handle">Modello 2</div>
-                <div class="fc-event ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">Modello 3</div>
-                <div class="fc-event ui-draggable ui-draggable-handle">Modello 4</div>
-                <div class="fc-event ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">Modello 5</div>
-                <p>
-                  <input type="checkbox" id="drop-remove">
-                  <label for="drop-remove">remove after drop</label>
-                </p>
+         <div class="row">
+           <div class="form-group col-sm-6" >
+             <label for="modello">Scegli Modello :</label>
+             <div>
+               <select class="form-control" ng-model="modello">
+                 <option value="Modello 1">Modello 1</option>
+                 <option value="Modello 2">Modello 2</option>
+                 <option value="Modello 3">Modello 3</option>
+               </select>
+             </div>
+           </div>
+            
+           <div class="form-group col-sm-2">
+              <label for="persona">Cerca Persona:</label>
+              <input id="ricerca" ng-model="query">
+           </div>
+           
+           <div class="form-group col-sm-4" style="color:blue" ng-show="query">
+             <ul>
+               <li class="btn" type="none" ng-repeat="x in persone | orderBy:'nome' | filter:query" ng-click="toggle()">
+                    {{ x.nome + ', cod : ' + x.codice }}
+               </li>
+             </ul>
+           </div>
          </div>
+         <br> <br>
+         <div class="row">
+           <div class="form-group col-sm-8">
+             
+              
+            <div id="calendar" class="fc fc-ltr fc-unthemed"> </div>  
 
-
-         <!-- <button type="button" class="btn btn-primary"  ng-click="addEvent()">Crea Evento</button>
-          <ul class="unstyled">
-                            <li ng-repeat="e in events">
-                                <div class="alert alert-info">
-                                    <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
-                                    <b> <input ng-model="e.title"></b> 
-                                    {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
-                                </div>
-                            </li>
-                        </ul> -->
-
-       </div>
-     </div>
-  </form>
-</div> 
-</body>   
+     
+           </div>
+           <div class="form-group col-sm-4" >
+             
+             <div id="external-events">
+               <h4>Trascina modelli sul calendario</h4>
+               <div class="fc-event ui-draggable ui-draggable-handle" ng-show="modello">{{modello}}</div>
+                   
+               <!-- sintassi per passare dati agli events: -->
+               <div class="fc-event ui-draggable ui-draggable-handle" data-event='{"title":"Modello x"}'>Modello x</div>
+               <div class="fc-event ui-draggable ui-draggable-handle">Modello y</div>
+               <div class="fc-event ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">Modello z</div>
+                    
+                    
+             </div>
+           </div>
+         </div>
+      </form>
+    </div> 
+  </body>   
 </html>
