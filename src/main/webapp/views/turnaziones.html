@@ -78,6 +78,7 @@
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
+      weekMode: 'liquid',
       firstDay: 1,
       allDaySlot : false,
       lazyFetching: false,
@@ -105,15 +106,18 @@
                 {
                   title  : 'Prova 1',
                   start  : '2015-01-01',
-                  end : '2015-01-03'
+                  end : '2015-01-03',
+                  description : 'Questa è una prova'
                 },
                 {
                   title  : 'Prova 2',
-                  start  : '2015-01-03'
+                  start  : '2015-01-03',
+                  description : 'Questa è una prova'
                 },
                 {
                   title  : 'Prova 3',
-                  start  : '2015-01-04'
+                  start  : '2015-01-04',
+                  description : 'Questa è una prova'
                 }
 
               ],
@@ -136,6 +140,19 @@
           
      },
       
+      eventClick:  function(calEvent, jsEvent, view) {
+            $('#modalTitle').html(calEvent.title);
+            $('#modalBody').html(calEvent.description);
+          // $('#eventUrl').attr('href',event.url);
+            $('#fullCalModal').modal();
+            //$('#calendar').fullCalendar('removeEvents',calEvent.id);  // aggiustare qui: inserire funzione per cncellare
+        }, 
+
+        
+
+
+
+      /*
       eventClick: function(calEvent) {
         if(confirm("Elimino dal calendario il modello per il giorno selezionato?")) {
                 $.ajax({
@@ -149,13 +166,13 @@
                   }
                 });
         }
-      },
-
+      },*/
+      /*
       eventMouseover: function(calEvent) {
                                 $(this).find('.fc-event-title').html('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'+calEvent.title);
                         }
 
-
+       */
 
     });
   });
@@ -206,15 +223,46 @@
              
              <div id="external-events">
                <h4>Trascina modelli sul calendario</h4>
-               <div class="fc-event ui-draggable ui-draggable-handle" ng-show="modello">{{modello}}</div>
-                   
-               <!-- sintassi per passare dati agli events: -->
-               <div class="fc-event ui-draggable ui-draggable-handle" data-event='{"title":"Modello x"}'>Modello x</div>
-               <div class="fc-event ui-draggable ui-draggable-handle">Modello y</div>
-               <div class="fc-event ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">Modello z</div>
+                  
+               <div class="fc-event ui-draggable ui-draggable-handle" ng-repeat="(modello,value) in listaModelli" >{{modello}}</div>
                     
+               <div class="fc-event ui-draggable ui-draggable-handle">Modello x</div>
+
+
+               <!-- <div class="fc-event ui-draggable ui-draggable-handle" ng-show="modello">{{modello}}</div>
+                   
+               
+               <div class="fc-event ui-draggable ui-draggable-handle">Modello x</div>
+               <div class="fc-event ui-draggable ui-draggable-handle">Modello y</div>
+               <div class="fc-event ui-draggable ui-draggable-handle">Modello z</div> -->
+                  
                     
              </div>
+
+             <div id="fullCalModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                <h4 id="modalTitle" class="modal-title"></h4>
+            </div>
+            <div id="modalBody" class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <!-- <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button> -->
+                <button class="btn btn-danger" id="elimina" data-dismiss="modal">Elimina</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
            </div>
          </div>
       </form>

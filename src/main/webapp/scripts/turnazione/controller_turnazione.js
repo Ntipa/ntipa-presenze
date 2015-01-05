@@ -40,6 +40,22 @@ ntipapresenzeApp.controller('TurnazioneController', function ($scope, resolvedTu
                 {"nome": "Testaverde", "codice": "TSVGVN73R08G372A"}
         ];
 
+        $scope.listaModelli = {
+          modello1: [
+                {
+                  title  : 'Prova 1',
+                  numGiorni : 3,
+                  description : 'Prova 1 desc'
+                }],
+          modello2: [
+                {
+                  title  : 'Prova 2',
+                  numGiorni : 7,
+                  description : 'Prova 2 desc'
+                }]};
+
+          
+
        /* $scope.eventSources = {};
 
         $scope.uiConfig = {
