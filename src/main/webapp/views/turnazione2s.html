@@ -1,0 +1,88 @@
+<div>
+      <form class="form-inline" role="form">
+         <h2>Turnazione:</h2><br>
+         
+         <div class="row">
+           <div class="form-group col-sm-6" >
+             <label for="modello">Scegli Modello :</label>
+             <div>
+               <select class="form-control" ng-model="modello">
+                 <option value="Modello 1">Modello 1</option>
+                 <option value="Modello 2">Modello 2</option>
+                 <option value="Modello 3">Modello 3</option>
+               </select>
+             </div>
+           </div>
+            
+           <div class="form-group col-sm-2">
+              <label for="persona">Cerca Persona:</label>
+              <input id="ricerca" ng-model="query">
+           </div>
+           
+           <div class="form-group col-sm-4" style="color:blue" ng-show="query">
+             <ul>
+               <li class="btn" type="none" ng-repeat="x in persone | orderBy:'nome' | filter:query" ng-click="toggle()">
+                    {{ x.nome + ', cod : ' + x.codice }}
+               </li>
+             </ul>
+           </div>
+         </div>
+         <br> <br><br>
+         <div class="row">
+           <div class="form-group col-sm-8">
+           <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                <h4>{{alertMessage}}</h4>
+              </div>
+             
+              
+            <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>  
+
+     
+           </div>
+           
+           <div class="form-group col-sm-4" >
+             <div class="btn-group calTools">
+                                      
+              
+              <button type="button" class="btn btn-primary" ng-click="addEvent()">
+                Aggiungi evento
+              </button>
+
+
+             </div>
+
+
+             <ul class="list-unstyled">
+                <li ng-repeat="e in events">
+                    <div class="alert alert-info">
+
+                        <a ng-click="remove($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <b> <input ng-model="e.title"></b> 
+                        {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
+                    </div>
+                </li>
+              </ul>
+              
+
+          <!-- Modale --> 
+    <div id="fullCalModal" class="modal fade">    
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+            <h4 id="modalTitle" class="modal-title"></h4>
+          </div>
+        <div id="modalBody" class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!-- <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button> -->
+            <button class="btn btn-danger" id="elimina" data-dismiss="modal" ng-click ="remove()">Elimina</button>
+          </div>
+        </div>
+      </div>
+    </div>        
+            
+            </div>
+         </div>
+      </form>
+    </div> 

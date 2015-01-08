@@ -8,5 +8,6 @@
     <include file="classpath:config/liquibase/changelog/20141205105853_added_entity_Timbratura.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20141211123610_added_entity_Turnazione.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20141212135012_added_entity_ModelloTurno.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150108092100_added_entity_Turnazione2.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 </databaseChangeLog>
