@@ -40,11 +40,32 @@ ntipapresenzeApp.controller('Turnazione2Controller', function ($scope, resolvedT
             {"nome": "Testaverde", "codice": "TSVGVN73R08G372A"}
     ];
 
+    /*$scope.listaModelli = {
+          modello1: [
+                {
+                  title  : 'Prova 1',
+                  start: new Date(y, m, d - 5),
+                  end: new Date(y, m, d - 2)
+                }],
+          modello2: [
+                {
+                  title  : 'Prova 2',
+                  start: new Date(y, m, d + 3),
+                  end: new Date(y, m, d + 7)
+                }]};*/
+
 
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
+
+    /* event source that pulls from google.com */
+    /*$scope.eventSource = {
+            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+            className: 'gcal-event',           // an option!
+            currentTimezone: 'America/Chicago' // an option!
+    };*/
     
     
 
@@ -52,8 +73,6 @@ ntipapresenzeApp.controller('Turnazione2Controller', function ($scope, resolvedT
     $scope.events = [
       {title: 'All Day Event',start: new Date(y, m, 1)},
       {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      {title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 30),allDay: false},
-      {title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
       {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false}
       
     ];
@@ -100,6 +119,29 @@ ntipapresenzeApp.controller('Turnazione2Controller', function ($scope, resolvedT
         end: new Date(y, m, 15)
       });
     };
+    /*$scope.addModello = function(index) {
+    switch(index) {
+        case 'Modello1':
+          $scope.events.push({
+            title  : 'Prova 1',
+            start: new Date(y, m, d, 12, 0),
+            allDay: false
+            
+           });
+          break;
+        
+        case 'Modello2':
+            $scope.events.push({
+                title  : 'Prova 2',
+                start: new Date(y, m, 17),
+                end: new Date(y, m, 18)
+               });
+          break;
+          
+
+     }; // fine dello switch
+      
+    };*/
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);
@@ -157,7 +199,8 @@ ntipapresenzeApp.controller('Turnazione2Controller', function ($scope, resolvedT
         eventDrop: $scope.alertOnDrop,
         eventResize: $scope.alertOnResize,
         eventRender: $scope.eventRender,
-        eventDurationEditable: false
+        eventDurationEditable: false,
+        theme:true
 
       }
     };
